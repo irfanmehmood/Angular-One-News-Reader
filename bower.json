@@ -1,0 +1,25 @@
+{
+  "name": "client",
+  "description": "",
+  "main": "index.html",
+  "authors": [
+    "Irfan Mehmood <irfan@digitalcook.co.uk>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5",
+    "angular-charts": "~0.2.7",
+    "angular-chart.js": "~0.8.5",
+    "Chart.js": "~1.0.2"
+  }
+}

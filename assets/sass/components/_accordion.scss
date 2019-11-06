@@ -1,0 +1,65 @@
+div#accordion, div#accordingSkills{
+  margin-top:40px;
+
+  .panel-default {
+    border-color: $colored_text;
+    border-width: 0px;
+
+    @media screen and (max-width: $break-small) {
+      h4 {
+        font-size:13px;
+      }
+    }
+
+    h5 {
+      color: $colored_text;
+      font-family: 'Oswald';
+      font-size:16px;
+    }
+  }
+
+  p {
+    font-family: 'Oswald', sans-serif;
+    line-height:2em;
+  }
+  div.panel-heading{
+    background-color: $colored_text;
+    color:white;
+    border-color: $colored_text;
+
+    a {
+      text-decoration: none;
+      padding-left: 2em;
+    }
+
+    a:before {
+      content: '\f061'; /* FontAwesome char code inside the '' */
+      font-family: FontAwesome; /* FontAwesome or whatever */
+      display: inline-block;
+      width: 2em; /* same as padding-left set on li */
+      margin-left: -2em; /* same as padding-left set on li */
+      color:$page-background-color;
+    }
+    span.name {
+      color: $colored_text;
+    }
+
+  }
+  .panel-body {
+    border-top: 2px $colored_text solid;
+  }
+
+  div.panel-collapse {
+    background-color: $page-background-color;
+    border-color: $colored_text;
+
+
+
+  }
+
+  ul {
+    list-style: none;
+    padding: 0 0 0 20px;
+    text-align: left;
+  }
+}

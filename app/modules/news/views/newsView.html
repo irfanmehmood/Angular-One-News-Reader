@@ -1,0 +1,24 @@
+<section class="{{pageClass}}">
+    <div class="row">
+        <div class="col-md-8">
+            <h3  class="diff-col">Headline News</h3>
+            <div ng-include="'app/modules/news/partials/newsItemsIsotopeNavBar.html'"></div>
+            <div ng-include="'app/shared/partials/newsItemsIsotope.html'"></div>
+        </div>
+        <div class="col-md-4">
+            <h3 class="diff-col">Today Trending Keywords</h3>
+            <div class="popkeywords">
+                <a class="btn button-custom btn-custom-one" href="/news/search/{{word.keyword}}" ng-repeat="word in keyWordsToday|limitTo:23 track by $index">
+                    {{word.keyword}}
+                </a>
+            </div>
+            <h3 class="diff-col">Yesterday Trending Keywords</h3>
+            <div class="popkeywords">
+                <a class="btn button-custom btn-custom-one" href="/news/search/{{word.keyword}}" ng-repeat="word in keyWordsYesterday|limitTo:23 track by $index">
+                    {{word.keyword}}
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,134 @@
+/* ---- .element-item ---- */
+.element-item {
+  text-align: left;
+  position: relative;
+  float: left;
+  height: 130px;
+  margin: 4px;
+  padding: 10px;
+  color: #262524;
+  border: 2px solid rgb(228, 79, 79);
+  width: 230px;
+  background: $nav-background-color;
+
+  @media screen and (max-width: $break-small) {
+    width: 100%;
+    margin-right: 20px;
+    height: 80px;
+  }
+  @media screen and (min-width: $break-large) {
+    width: 230px;
+  }
+}
+
+
+
+
+.element-related {
+  min-height: 66px;
+  margin: 0 0 8px 2px;
+  padding: 10px;
+  color: white;
+  border: 2px solid $colored_text;
+  @include bg-color-transition();
+  background: $nav-background-color;
+  line-height: 1.5em;
+}
+
+.element-related:hover {
+  background: $colored_text;
+}
+
+h2#story-heading-title{
+  color: $colored_text;
+  margin-bottom:20px;
+  line-height: 1.5em;
+}
+
+
+
+.element-item > * {
+  margin: 0;
+  padding: 0;
+}
+
+
+.element-related a.name:link  {
+  color:white;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 15px;
+  font-weight: normal;
+  font-family: 'Oswald', sans-serif !important;
+
+}
+
+.element-item .name{
+  position: absolute;
+  left: 10px;
+  margin-right: 10px;
+  top: 10px;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 2em;
+}
+
+.element-item .category {
+  position: absolute;
+  left: 10px;
+  bottom: 6px;
+  font-size: 12px;
+  padding:0;
+  margin: 0;
+
+
+
+}
+
+p.company a, p.category a{
+  color: $colored_text;
+  text-transform: capitalize;
+}
+
+p.company a:link, p.category a:link{
+  color: $colored_text;
+  text-transform: uppercase;
+}
+
+.element-item .company {
+  position: absolute;
+  left: 10px;
+  bottom: 6px;
+  font-size: 12px;
+  padding:0;
+  margin: 0;
+  @media screen and (max-width: $break-small) {
+    display: none;
+  }
+}
+
+.element-item .timeAgo {
+  position: absolute;
+  right: 10px;
+  bottom: 6px;
+  font-size: 12px;
+  padding:0;
+  margin: 0;
+  color: $colored_text;
+
+  @media screen and (max-width: $break-small) {
+    display: none;
+  }
+}
+
+h3.name a:link {
+  color:white !important;
+  text-decoration:none ;
+}
+
+h3.name a:hover {
+  color: $colored_text;
+  text-decoration: underline;
+}

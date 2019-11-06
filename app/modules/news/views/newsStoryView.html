@@ -1,0 +1,28 @@
+	<div class="row">
+		<div class="col-md-8">
+			<h2 id="story-heading-title">
+				{{story.title}}
+			</h2>
+			<div id="story-body" ng-bind-html="my_html | to_trusted"></div>
+		</div>
+		<div class="col-md-4">
+			<h3>Article Info</h3>
+            <div class="popkeywords">
+                <a href="/news/channels/{{story.companySlug}}/{{story.category}}" class="btn button-custom btn-custom-one">{{story.company}} / {{story.category}}</a>
+                <a href="{{story.link}}" class="btn button-custom btn-custom-one">Original Link</a>
+                <button class="btn button-custom btn-custom-one"><span class="storyTime timeAgo">{{story.created|timeago}}</span></button>
+            </div>
+			<h3>Article Keywrods</h3>
+			<div class="popkeywords">
+				<a class="btn button-custom btn-custom-one" href="/news/search/{{item.keyword}}" ng-repeat="item in keyWords">{{item.keyword}}</a>
+			</div>
+			<h3>Related Articles</h3>
+			<div  class="element-related  row" ng-click="go(item.title)" ng-repeat="item in relatedItems">
+				<a href="/news/story/{{item._id}}/{{item.title | lowercase | clean_url}}" class="name">{{ item.title | cut:true:100:' ...' }}</a>
+			</div>
+			<div>
+			</div>
+		</div>
+	</div>
+	<!-- 	<div ng-bind-html="my_html | to_trusted"></div>
+-->

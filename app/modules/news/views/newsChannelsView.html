@@ -1,0 +1,41 @@
+<div class="item">
+    <h3>
+        <span class="dynamic_heading">{{ category }}</span> Channels News
+    </h3>
+    <div class="row">
+        <div class="col-md-6" style="text-align:left;">
+            <div class="row">
+                <div class="col-md-6">
+                    <select class="form-control" id="selSources" ng-model="sourceSelected" ng-options="item._id.name for item in sources track by item._id.name" ng-change="loadNews(1)"></select>
+
+                </div>
+                <div class="col-md-6">
+                    <select class="form-control" id="selCategories" ng-model="categorySelected" ng-options="item._id for item in categories track by item._id" ng-change="loadNews(1)"></select>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 text-right">
+            <nav>
+                <ul class="pagination">
+                    <li>
+                        <a href="/news/channels/{{sourceSelected._id.slug}}/{{categorySelected._id}}/{{pageNo == 1 ? 1 : pageNo - 1}}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+
+                    <li>
+
+                        <a href="#paging" ng-class="disabled">Page {{pageNo}} of {{totalPages}}</a>
+                    </li>
+                    <li>
+                        <a href="/news/channels/{{sourceSelected._id.slug}}/{{categorySelected._id}}/{{pageNo == totalPages ?  pageNo : parseInt(pageNo)+parseInt(1)}}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div ng-include="'app/modules/news/partials/newsChannelsItemIsotope.html'"></div>
+</div>

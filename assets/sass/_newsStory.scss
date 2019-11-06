@@ -1,0 +1,18 @@
+/* bbc headline  */
+h1.story-body__h1{
+  display:none;
+}
+
+/* bbc contact form */
+.contact-form {
+  display:none;
+}
+
+/* cnn headline  */
+.l-container div.zn-body__paragraph:first-child {
+  display:none;
+}
+
+div.page-news-story h3 {
+  color:$colored_text;
+}

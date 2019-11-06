@@ -1,0 +1,44 @@
+<section ng-controller="keywordsReportController">
+    <span class="section-head">
+                <h3><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Charts Analysis</h3>
+        </span>
+    <div class="row">
+        <div class="col-md-2 col-sm-12 col-xs-12">
+            <h3 class="diff-col">Display Filters</h3>
+            <select
+                    class="form-control"
+                    id="selSources"
+                    ng-change="getData()"
+                    ng-model="selectedDate">
+                <option ng-repeat="option in selectOptions" value="{{option.value}}">
+                    {{option.displayName}}
+                </option>
+            </select>
+            <select
+                    class="form-control"
+                    id="selchart"
+                    ng-change="getData()"
+                    ng-model="chartType"
+                    style="margin: 20px 0;">
+                <option ng-repeat="option in chartOptions" value="{{option.value}}">
+                    {{option.displayName}}
+                </option>
+            </select>
+        </div>
+        <div class="col-md-10 col-sm-12 col-xs-12">
+            <canvas id="line" class="chart chart-line" chart-data="data"
+                    chart-labels="labels" chart-legend="false" chart-series="series"
+                    chart-click="onClick"
+                    ng-show="showSeriesChart == true">
+            </canvas>
+            <canvas id="doughnut" class="chart chart-doughnut"
+                    chart-data="data" chart-labels="labels"
+                    ng-show="showPieChart == true">
+            </canvas>
+            <canvas id="bar" class="chart chart-bar"
+                    chart-data="data" chart-labels="labels"
+                    ng-show="showBarChart == true">
+            </canvas>
+        </div>
+    </div>
+</section>

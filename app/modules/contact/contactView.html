@@ -1,0 +1,139 @@
+<section id="contact">
+    <span class="section-head">
+        <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Contact Me</h2>
+    </span>
+    <div class="row">
+        <div class="col-md-12 contact-text embossed-heavy">
+          <p>I work as a freelance technical consultant & a full Stack software engineer. I have over 15 years of development, devops, systems admin experience.
+          For you, I can architect, develop, advise and contribute in all technical aspects of your project. From discovery, conception, development, delivery to management. On budget and on time!</p>
+          <p>I work from my <strong>office base</strong>, in the <strong>heart of London</strong>. why not drop in, give me a call on <strong>+44 795 775511 2</strong> or use the <strong>form below</strong> to send me a message. Thanks</p>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Contact Form</h3>
+            <div class="form-area">
+                <form role="form" id="contactForm">
+                    <br style="clear:both">
+                    <div class="form-group inner-addon left-addon">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                        <div  class="error-msgss" id="error-name" style="display:none"><div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><strong class="error-msg">Valid name required.</strong></div></div>
+
+                    </div>
+                    <div class="form-group  inner-addon left-addon">
+                        <i class="glyphicon glyphicon-envelope"></i>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
+                        <div class="error-msgss"  id="error-email" style="display:none"><div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><strong class="error-msg">Valid email required.</strong></div></div>
+
+                    </div>
+                    <div class="form-group  inner-addon left-addon">
+                        <i class="glyphicon glyphicon-phone"></i>
+                        <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Phone" required>
+                        <div class="error-msgss" id="error-phone" style="display:none"><div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><strong class="error-msg">Valid phone required.</strong></div></div>
+
+                    </div>
+                    <div class="form-group  inner-addon left-addon">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
+                        <div class="error-msgss"  id="error-subject" style="display:none"><div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><strong class="error-msg">Valid subject required.</strong></div></div>
+
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" type="textarea" id="message" placeholder="Message" maxlength="140" rows="7"></textarea>
+                        <div class="error-msgss"  id="error-message" style="display:none"><div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><strong class="error-msg">Valid message required.</strong></div></div>
+                        <span class="help-block"><p id="characterLeft" class="help-block ">You have reached the limit</p></span>
+
+                    </div>
+                    <div id="success" style="display:none"><div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><strong id="success-msg">Your message has been delivered. Thanks.</strong></div></div>
+                    <div id="error-server" style="display:none"><div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><strong id="error-msg">Error sending message.</strong></div></div>
+
+                    <button type="button" id="submitFrom" name="submit" class=" btn button-custom btn-custom-two">Send form</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h3>My Location</h3>
+            <div id="gmap-lyt">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.3240340464645!2d-0.0858469491174204!3d51.52561631709287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761ca55fd78835%3A0xa2bf86f30f62e431!2s90+Paul+St%2C+London+EC2A+4UX!5e0!3m2!1sen!2suk!4v1451759361677" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+</section>
+<script>
+    $(document).ready(function(){
+
+
+
+      $("#submitFrom").click(function(){
+        // get values from FORM
+
+
+
+        var name = $("input#name").val();
+        var email = $("input#email").val();
+        var phone = $("input#mobile").val();
+        var subject = $("input#subject").val();
+        var message = $("textarea#message").val();
+
+        var firstName = name; // For Success/Failure Message
+        // Check for white space in name for Success/Fail message
+        if (firstName.indexOf(' ') >= 0) {
+            firstName = name.split(' ').slice(0, -1).join(' ');
+        }
+
+        $("#success").hide();
+        $("#submitFrom").hide();
+        $("#error-name").hide();
+        $("#error-email").hide();
+        $("#error-phone").hide();
+        $("#error-subject").hide();
+        $("#error-message").hide();
+
+        $.ajax({
+          url: "contact_me.php",
+          type: "POST",
+          data: {
+              name: name,
+              phone: phone,
+              email: email,
+              subject: subject,
+              message: message
+          },
+          success: function(data){
+
+            //console.log(data);
+            if (data != 'success') {
+                var errors = JSON.parse(data);
+                for (var i = 0; i < errors.length; i++) {
+                    //console.log(errors[i]);
+                    $("#error-" + errors[i]).show();
+                }
+            } else {
+              //Success
+              $("#success").show();
+              $("#success-msg").html('Your message has been delivered');
+            }
+            $("#submitFrom").show();
+          }});
+      });
+          $('#characterLeft').text('140 characters left');
+          $('#message').keydown(function () {
+              var max = 140;
+              var len = $(this).val().length;
+              if (len >= max) {
+                  $('#characterLeft').text('You have reached the limit');
+                  $('#characterLeft').addClass('red');
+                  $('#btnSubmit').addClass('disabled');
+              }
+              else {
+                  var ch = max - len;
+                  $('#characterLeft').text(ch + ' characters left');
+                  $('#btnSubmit').removeClass('disabled');
+                  $('#characterLeft').removeClass('red');
+              }
+          });
+    });
+</script>

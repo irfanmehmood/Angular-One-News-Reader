@@ -1,0 +1,52 @@
+form#contactForm input {
+  border: 2px solid rgb(228, 79, 79) !important;
+  padding: 20px 10px 20px 40px  !important;
+}
+
+form#searchFom input {
+  border: 2px solid rgb(228, 79, 79) !important;
+  padding: 16px 10px !important;
+}
+
+form {
+  padding:0;
+}
+form  input::-webkit-input-placeholder { /* WebKit browsers */
+  line-height: 1.5em;
+}
+form input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  line-height: 1.5em;
+}
+form input::-moz-placeholder { /* Mozilla Firefox 19+ */
+  line-height: 1.5em;
+}
+form input:-ms-input-placeholder { /* Internet Explorer 10+ */
+  line-height: 1.5em;
+}
+.form-area
+{
+  padding: 0;
+  margin: 0px 0px 60px 0px;
+  border: 0;
+}
+
+/* enable absolute positioning */
+.inner-addon {
+  position: relative;
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+  color: #e44f4f;
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }

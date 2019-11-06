@@ -1,0 +1,26 @@
+.pagination{
+  margin:0;
+}
+
+.button-group button, .pagination li a:link, .pagination li a:visited{
+  font-family: 'Oswald', sans-serif !important;
+  background-color: rgb(228, 79, 79) ;
+  color:white;
+}
+
+.pagination li a:hover{
+  background-color: #A00F20 !important;
+}
+
+.disabled a:link, .disabled a:visited, .disabled a:hover{
+  background-color: #A00F20 !important;
+  color:white !important;
+}
+
+li.disabled {
+
+}
+
+.paginationBar{
+  margin:20px 5px;
+}

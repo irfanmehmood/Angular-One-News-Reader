@@ -1,0 +1,50 @@
+/* Carousel */
+
+
+
+.carousel-caption{
+  color:#000;
+  position:static;
+}
+.item{
+  display:block;
+
+  h3 {
+    color:white;
+  }
+
+  p {
+    font-family: Roboto;
+  }
+}
+#carousel-slider {
+
+  padding: 50px 20px;
+  text-align: center;
+
+
+
+
+
+  h3 {
+    line-height: 50px;
+    font-family: 'Oswald', sans-serif;
+  }
+
+
+  p {
+    color: $colored_text;
+    font-size: 18px;
+    line-height: 2em;
+    margin: 25px 20px;
+    font-family: 'Oswald';
+  }
+
+  a.slider-nav {
+    color:white;
+    font-size:40px;
+    padding: 4px 10px 6px 10px;
+  }
+
+
+}

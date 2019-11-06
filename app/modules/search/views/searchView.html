@@ -1,0 +1,36 @@
+<div class="item">
+    <div class="row">
+        <div class="col-md-6 text-left" >
+            <h2 id="story-heading">Search Term <span class="searchTerm">{{ term }}</span></h2>
+        </div>
+        <div class="col-md-6 text-right">
+            <nav>
+                <ul class="pagination">
+                    <li>
+                        <a href="/news/search/{{term}}/{{pageNo == 1 ? 1 : pageNo - 1}}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <!--
+                    <li ng-repeat="a in range(totalPages) track by $index" ng-class="{'disabled': pageNo ==  $index + 1}">
+
+                        <a href="#/news/search/{{term}}/{{$index + 1}}">
+                            {{$index + 1}}
+                        </a>
+                    </li>-->
+                    <li>
+
+                        <a href="#paging" ng-class="disabled">Page {{pageNo}} of {{totalPages}}</a>
+                    </li>
+                    <li>
+                        <a href="/news/search/{{term}}/{{pageNo == totalPages ?  pageNo : parseInt(pageNo)+parseInt(1)}}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div ng-include="'app/shared/partials/newsItemsIsotope.html'"></div>
+
+</div>

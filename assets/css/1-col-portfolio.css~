@@ -1,0 +1,113 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu); /* FREE GOOGLE FONT */
+@import url(http://fonts.googleapis.com/css?family=Oswald); /* FREE GOOGLE FONT */
+
+
+/*!
+ * Start Bootstrap - 1 Col Portfolio HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+body {
+    padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. */
+		       /* Change if height of navigation changes. */
+}
+
+footer {
+    margin: 50px 0;
+}
+
+
+/* My Red Theme Overrides */
+.navbar-inverse {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    border-color: transparent !important;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: transparent;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    font-size: 12px;
+    font-weight: 800;
+    padding: 5px 0px;
+    letter-spacing: 2px;
+    margin: 10px 20px 10px 20px;
+    color: #FFF;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+    background-color: transparent;
+    border-bottom: 1px solid rgb(228, 79, 79);
+}
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-brand:hover {
+    color: #fff;
+    font-weight: 900;
+    font-family: 'Oswald', sans-serif;
+}
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    color: #fff;
+    background-color: #A00F20;
+    font-size: 14px;
+    line-height: 1.42857143
+}
+
+/* ANIMATIONS
+============================================================================= */
+.view-slide-in {
+margin-top:100px;
+}
+
+.item h3  {
+	line-height: 50px;
+font-family: 'Oswald', sans-serif;
+}
+
+.item p {
+	color: rgb(228, 79, 79);
+	font-size: 16px;
+	line-height: 25px;
+	margin: 25px 20px;
+}
+
+
+
+
+
+.view-slide-in.ng-enter {
+  transition: all 1s ease;
+  -webkit-transition:all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  
+  opacity:0.5;
+  position:relative;
+  opacity:0;
+  top:10px;
+  left:20px;
+}
+.view-slide-in.ng-enter {
+  opacity: 0;
+}
+.view-slide-in.ng-enter.ng-enter-active {
+  top:0;
+  left:0;
+  opacity: 1;
+}
+.view-slide-in.ng-leave.ng-leave-active{
+  top:5px;
+  left:5px;
+  opacity:1;
+}
+.view-slide-in.ng-leave{
+  top:0;
+  left:0;
+  opacity:0;
+}
+/* don't forget about the vendor-prefixes! */
+
+    

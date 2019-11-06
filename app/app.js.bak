@@ -1,0 +1,339 @@
+var personalApp = angular.module('personalApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngtimeago'])
+
+            .filter('to_trusted', ['$sce', function($sce){
+                return function(text) {
+                        return $sce.trustAsHtml(text);
+            }}])
+            .filter('cut', function () {
+                return function (value, wordwise, max, tail) {
+                    if (!value) return '';
+
+                    max = parseInt(max, 10);
+                    if (!max) return value;
+                    if (value.length <= max) return value;
+
+                    value = value.substr(0, max);
+                    if (wordwise) {
+                        var lastspace = value.lastIndexOf(' ');
+                        if (lastspace != -1) {
+                            value = value.substr(0, lastspace);
+                        }
+                    }
+
+                    return value + (tail || ' …');
+                };
+            });
+
+
+
+/*  Problem:
+    This directive was created to solve the problem with isotope.
+    This was due to ng-repeat creating dynamic content from api
+
+    Solution
+    Create directive to listen out for items creation callback, once last
+    item has been created, we fire onItemsCreatedEvent declared in our controller method
+
+    */
+
+personalApp.directive('ngMyisotope', function($timeout) {
+    return function (scope, element, attrs) {
+        if (scope.$last === true) {
+            scope.$emit('onItemsCreatedEvent');
+        }
+    }
+});
+
+
+
+
+personalApp.config(function($routeProvider) {
+    $routeProvider
+        .when('/', {
+            templateUrl: 'page-home.html',
+            controller: 'mainController'
+        })
+        .when('/home', {
+                templateUrl: 'page-home.html',
+            controller: 'mainController'
+        })
+        .when('/news', {
+            templateUrl: 'page-news.html',
+            controller: 'newsController'
+        })
+        .when('/news/story/:id', {
+            templateUrl: 'page-news-story.html',
+            controller: 'newsStoryController'
+        })
+        .when('/news/category/:category?', {
+            templateUrl: 'page-news-category.html',
+            controller: 'newsCategoryController'
+        })
+        .when('/news/channels/:companySlug/:category/:pageNo?', {
+            templateUrl: 'page-news-browse.html',
+            controller: 'newsBrowseController'
+        })
+        .when('/news/source/:source', {
+            templateUrl: 'page-news-source.html',
+            controller: 'newsSourceController'
+        })
+        //Set :page as optional parameter for the search page route
+        .when('/news/search/:term/:pageNo?', {
+            templateUrl: 'page-news-search.html',
+            controller: 'newsSearchController'
+        })
+        .when('/about', {
+            templateUrl: 'page-about.html',
+            controller: 'aboutController'
+        })
+        .when('/contact', {
+            templateUrl: 'page-contact.html',
+            controller: 'contactController'
+        });
+
+});
+
+
+personalApp.factory('isotopeInit', function() {
+
+    var isotope = {};
+
+    isotope.innit = function() {
+        /* Init Isotope */
+        var $container = $('.isotope').isotope({
+            itemSelector: '.element-item',
+            layoutMode: 'fitRows',
+            getSortData: {
+
+            }
+        });
+
+        /* Attach evenst to filter Items */
+
+        $('#filters').on( 'click', 'button', function() {
+            var filterValue = $( this ).attr('data-filter');
+            // use filterFn if matches value
+            var filterValue = $( this ).attr('data-filter');
+            // use filterFn if matches value
+            $container.isotope({ filter: filterValue });
+        });
+
+        // change is-checked class on buttons
+        $('.button-group').each( function( i, buttonGroup ) {
+            var $buttonGroup = $( buttonGroup );
+
+            $buttonGroup.on( 'click', 'button', function() {
+                $buttonGroup.find('.is-checked').removeClass('is-checked');
+                $( this ).addClass('is-checked');
+            });
+        });
+
+        $container.isotope('shuffle');
+
+    };
+
+    return isotope;
+
+});
+
+personalApp.controller('newsSearchController', function($scope, $http, $routeParams, isotopeInit) {
+
+    //We set initial page as 1 for monogdb logic
+    $scope.pageNo = $routeParams.pageNo ? $routeParams.pageNo : 1;
+    $scope.pageClass = 'page-news-story';
+
+    /* This is neede to increase page value in pagination nav url, as otherwise angular concat numbers as strings */
+    $scope.parseInt = parseInt;
+
+    $scope.term = $routeParams.term;
+
+    $http.get('http://127.0.0.1:3000/api/v1.0/feed/item/searchFeedItems/' + $scope.term + "/" + $scope.pageNo).success(function(data) {
+        $scope.newsItems = data[0];
+        $scope.totalPages = data[1];
+    });
+
+
+    $scope.range = function(n) {
+        return new Array(n);
+    };
+
+    /* All the items have been created and binded with data */
+    /* Do the pretend Document Ready needed for initalising isotope and attach events to buttons */
+
+    $scope.$on('onItemsCreatedEvent', function (onItemsCreatedEventDoThis) {
+        isotopeInit.innit();
+        //console.log("I am here");
+    });
+
+});
+
+
+personalApp.controller('newsStoryController', function($scope, $http, $routeParams, $sce, $location) {
+
+    $scope.pageClass = 'page-news-story';
+    var id = $routeParams.id;
+
+    $scope.go = function ( term ) {
+        var path = '/news/search/' + term;
+        $location.path( path );
+    };
+
+    $http.get('http://127.0.0.1:3000/api/v1.0/feed/item/id/' + id).success(function(data) {
+        $scope.story = data[0];
+        $scope.my_html = data[0].description;
+        $scope.keyWords = JSON.parse(data[0].keyWords);
+        $scope.relatedItems = data[1];
+        console.log($scope.relatedItems);
+    });
+});
+
+personalApp.controller('newsSourceController', function($scope, $http, $routeParams, $sce, isotopeInit) {
+
+    $scope.pageClass = 'page-news-source';
+    var slug = $routeParams.source;
+    $scope.source = $routeParams.source;
+
+    $http.get('http://127.0.0.1:3000/api/v1.0/feed/listCategoriesBySource/' + slug).success(function(data) {
+        $scope.newsCategories = data;
+
+    });
+
+    $http.get('http://127.0.0.1:3000/api/v1.0/feed/listFeedItemsBySource/' + slug).success(function(data) {
+        $scope.newsItems = data;
+
+    });
+
+    /* All the items have been created and binded with data */
+    /* Do the pretend Document Ready needed for initalising isotope and attach events to buttons */
+
+    $scope.$on('onItemsCreatedEvent', function (onItemsCreatedEventDoThis) {
+        isotopeInit.innit();
+    });
+});
+
+personalApp.controller('newsCategoryController', function($scope, $http, $routeParams, $sce, isotopeInit) {
+
+    $scope.pageClass = 'page-news-category';
+    var category = $routeParams.category;
+
+    $scope.category = category;
+
+    $http.get('http://127.0.0.1:3000/api/v1.0/feed/listFeedItemsByCategory/' + category).success(function(data) {
+        $scope.newsItems = data;
+
+    });
+
+    $http.get('http://127.0.0.1:3000/api/v1.0/feed/listSourcesByCategory/' + category).success(function(data) {
+        $scope.newsSources = data;
+
+    });
+    /* All the items have been created and binded with data */
+    /* Do the pretend Document Ready needed for initalising isotope and attach events to buttons */
+
+    $scope.$on('onItemsCreatedEvent', function (onItemsCreatedEventDoThis) {
+        isotopeInit.innit();
+    });
+});
+
+
+personalApp.controller('newsController', function($scope, $http, $location, isotopeInit) {
+
+    $scope.pageClass = 'page-news';
+
+    $http.get('http://127.0.0.1:3000/api/v1.0/feed/items/headlinenews').success(function(data) {
+        $scope.newsItems = data[0];
+        $scope.keywords = data[1];
+
+    });
+
+    $scope.go = function ( term ) {
+        var path = '/news/search/' + term;
+        $location.path( path );
+    };
+
+    /* All the items have been created and binded with data */
+    /* Do the pretend Document Ready needed for initalising isotope and attach events to buttons */
+
+    $scope.$on('onItemsCreatedEvent', function (onItemsCreatedEventDoThis) {
+        isotopeInit.innit();
+    });
+
+});
+
+personalApp.controller('newsBrowseController', function($scope, $http, $routeParams, $sce, isotopeInit, $location) {
+
+    $scope.pageClass = 'page-browse';
+
+    /*
+    $scope.sourceSelected = $routeParams.source;
+
+    $scope.categorySelected = $routeParams.category;
+*/
+
+    /* This is neede to increase page value in pagination nav url, as otherwise angular concat numbers as strings */
+    $scope.parseInt = parseInt;
+
+
+    $scope.loadNews= function (pageNo) {
+        console.log($scope.categorySelected._id);
+        console.log($scope.sourceSelected._id.slug);
+
+
+        var path = '/news/browse/' + $scope.sourceSelected._id.slug + '/' + $scope.categorySelected._id + '/' + pageNo;
+        $location.path( path );
+
+        /*
+        $http.get('http://127.0.0.1:3000/api/v1.0/feed/listFeedItemsBySourceAndCategory/' + $scope.sourceSelected._id.slug + '/' + $scope.categorySelected._id + '/' + pageNo).success(function(data) {
+            $scope.newsItems = data[0];
+            $scope.totalPages = data[1];
+
+        });
+        */
+    };
+
+
+    $http.get('http://127.0.0.1:3000/api/v1.0/feed/listFeedCategories').success(function(data) {
+        $scope.categories = data;
+        //We have to create this JSON object manually to set the selected option , also had to use track by _id to the selectbox
+        $scope.categorySelected = {_id:$routeParams.category,total:3};
+    });
+
+    $http.get('http://127.0.0.1:3000/api/v1.0/feed/listFeedSources').success(function(data) {
+        $scope.sources = data;
+
+        for (i = 0;i < data.length; i++) {
+            if (data[i]._id.slug == $routeParams.companySlug) {
+                $scope.sourceSelected = data[i];
+                break;
+            }
+        }
+        //We have to create this JSON object manually to set the selected option , also had to use track by _id to the selectbox
+        //$scope.sourceSelected = {_id:,total:3};
+    });
+
+    $scope.pageNo = $routeParams.pageNo ? $routeParams.pageNo : 1;
+    $http.get('http://127.0.0.1:3000/api/v1.0/feed/listFeedItemsBySourceAndCategory/' + $routeParams.companySlug + '/' + $routeParams.category + '/' + $scope.pageNo).success(function(data) {
+        $scope.newsItems = data[0];
+        $scope.totalPages = data[1];
+
+    });
+
+    $scope.range = function(n) {
+        return new Array(n);
+    };
+
+    /* All the items have been created and binded with data */
+    /* Do the pretend Document Ready needed for initalising isotope and attach events to buttons */
+/**/
+    $scope.$on('onItemsCreatedEvent', function (onItemsCreatedEventDoThis) {
+        isotopeInit.innit();
+    });
+});
+
+personalApp.controller('aboutController', function($scope) {
+    $scope.pageClass = 'page-about';
+});
+
+personalApp.controller('contactController', function($scope) {
+    $scope.pageClass = 'page-contact';
+});

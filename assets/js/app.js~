@@ -1,0 +1,50 @@
+var personalApp = angular.module('personalApp', ['ngRoute', 'ngAnimate']);
+
+personalApp.config(function($routeProvider) {
+    $routeProvider
+        .when('/', {
+            templateUrl: 'page-home.html',
+            controller: 'mainController'
+        })
+        .when('/about', {
+            templateUrl: 'page-about.html',
+            controller: 'aboutController'
+        })
+        .when('/contact', {
+            templateUrl: 'page-contact.html',
+            controller: 'contactController'
+        });
+
+});
+
+personalApp.controller('mainController', function($scope) {
+    $scope.pageClass = 'page-home';
+});
+
+personalApp.controller('aboutController', function($scope) {
+    $scope.pageClass = 'page-about';
+});
+
+personalApp.controller('contactController', function($scope) {
+    $scope.pageClass = 'page-contact';
+});
+
+personalApp.controller('navController', function($scope, $location) {
+     $scope.navLinks = [{
+        Title: 'home',
+        LinkText: 'HOME',
+    }, {
+        Title: 'about',
+        LinkText: 'ABOUT'
+    }, {
+        Title: 'contact',
+        LinkText: 'CONTACT'
+    }];
+
+    $scope.navClass = function (page) {
+        var currentRoute = $location.path().substring(1) || 'home';
+        return page === currentRoute ? 'active' : '';
+    };
+
+
+});

@@ -1,0 +1,7 @@
+<div class="isotope" >
+    <div class="element-item {{item.companySlug}} " ng-repeat="item in newsItems" ng-myisotope>
+        <h3 class="name"><a href="#/news/story/{{item._id}}/{{item.title | lowercase | clean_url}}" >{{ item.title | cut:true:90:' ...' }}</a></h3>
+        <p class="company"><a  href="#/news/channels/{{item.companySlug}}/{{item.category}}">{{item.category}}</a></p>
+        <p class="timeAgo">{{item.created|timeago}}</p>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu); /* FREE GOOGLE FONT */
+@import url(http://fonts.googleapis.com/css?family=Oswald); /* FREE GOOGLE FONT */
+
+$page-background-color: #A00F20;
+$nav-background-color: rgba(0, 0, 0, 0.4);
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+  font-family: 'Ubuntu', sans-serif;
+  color: #fff;
+  background-color: $page-background-color;
+}
+
+/* My Red Theme Overrides */
+.navbar {
+  background-color: $nav-background-color !important;
+  border-color: transparent !important;
+}
+
+.nav-tabs {
+  border-bottom: 4px solid $nav-background-color;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+  color: white;
+  cursor: default;
+  background-color: $nav-background-color;;
+  border: 0px solid $nav-background-color;
+  border-bottom: 1px solid $nav-background-color;
+  border-bottom-color: $nav-background-color;;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+  text-decoration: none;
+  background-color: $nav-background-color;
+  color:white;
+}
+
+.navbar .navbar-collapse, .navbar .navbar-form {
+  border-color: transparent;
+}
+
+.navbar .navbar-nav > li > a {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 5px 0px;
+  letter-spacing: 2px;
+  margin: 10px 20px 10px 20px;
+  color: #FFF;
+}
+
+.navbar .navbar-nav > .active > a, .navbar .navbar-nav > .active > a:hover, .navbar .navbar-nav > .active > a:focus {
+  background-color: transparent;
+  border-bottom: 1px solid rgb(228, 79, 79);
+}
+
+.navbar .navbar-brand, .navbar .navbar-brand:hover {
+  color: #fff;
+  font-weight: 900;
+  font-family: 'Oswald', sans-serif;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: $page-background-color;
+}
+
+body > .container {
+  padding: 60px 15px 0;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}

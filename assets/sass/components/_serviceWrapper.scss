@@ -1,0 +1,55 @@
+.services-wrapper:hover {
+  background-color: rgba(255, 255, 255, 0.20);
+}
+ .services-wrapper {
+  padding: 15px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  margin-bottom: 40px;
+  background-color: rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+
+}
+.services-wrapper{
+  text-align:center;
+  h3 { color:$colored_text; margin-bottom:20px;}
+  ul {
+
+    list-style: none;
+    padding: 0 0 0 20px;
+    text-align: left;
+
+    li {
+      font-family: 'Oswald', sans-serif;
+      line-height: 2em;
+      font-size: 16px;
+      padding-left: 2em;
+
+      ul li {
+
+      }
+
+    }
+
+    li:before {
+      content: '\f061'; /* FontAwesome char code inside the '' */
+      font-family: FontAwesome; /* FontAwesome or whatever */
+      display: inline-block;
+      width: 2em; /* same as padding-left set on li */
+      margin-left: -2em; /* same as padding-left set on li */
+      color:$colored_text;
+    }
+
+  }
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}

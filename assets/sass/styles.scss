@@ -1,0 +1,426 @@
+@import url(http://fonts.googleapis.com/css?family=Lato); /* FREE GOOGLE FONT */
+@import url(http://fonts.googleapis.com/css?family=Oswald); /* FREE GOOGLE FONT */
+
+$break-small: 480px;
+$break-large: 1000px;
+
+
+$page-background-color: #A00F20;
+$nav-background-color: #600913;
+$colored_text: rgb(228, 79, 79);
+
+@mixin bg-color-transition () {
+  -moz-transition: all .2s ease-in;
+  -o-transition: all .2s ease-in;
+  -webkit-transition: all .2s ease-in;
+  transition: all .2s ease-in;
+}
+
+
+.filters-skills {
+
+  .button-group .btn{
+    clear:left;
+  }
+}
+
+
+
+
+section {
+  p {
+    font-family: 'Lato';
+    font-size: 15px;
+  }
+
+  h3 {
+    color: white;
+    text-align: center;
+    margin-bottom:20px;
+  }
+
+  hr {
+    border-top: 2px solid $colored_text;
+    margin: 0px 0 30px 0;
+  }
+
+  span.section-head{
+      padding: 50px 20px;
+      text-align: center;
+  }
+
+  }
+
+
+
+  p.about {
+    font-size: 15px;
+
+  }
+
+  ul.specialise{
+
+    list-style: none;
+    padding:0;
+    margin:0 0 10px 0;
+
+    li {
+      background-color: transparent;
+      color: #fff;
+      border: 2px solid $colored_text;
+      margin: 10px 6px 40px 0px ;
+      font-family: 'Oswald', sans-serif;
+      line-height: 46px;
+      border-radius: 3px;
+      padding: 5px 10px;
+      display: inline;
+      white-space: nowrap;
+
+    }
+
+  }
+
+  ul.about {
+    list-style: none;
+    padding:0;
+    margin:0;
+
+    li {
+      line-height: 2em;
+      padding-left: 2em;
+    }
+
+    li:before {
+      content: '\f061'; /* FontAwesome char code inside the '' */
+      font-family: FontAwesome; /* FontAwesome or whatever */
+      display: inline-block;
+      width: 2em; /* same as padding-left set on li */
+      margin-left: -2em; /* same as padding-left set on li */
+      color:$colored_text;
+    }
+
+    li:hover{
+      background: $colored_text;
+    }
+
+
+  }
+
+  html {
+    position: relative;
+    min-height: 100%;
+  }
+
+
+  body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    font-family: 'Roboto', 'arial', sans-serif;
+
+    letter-spacing: 1px;
+    color: #fff;
+    background-color: $page-background-color;
+  }
+
+  @import 'navbar_main';
+
+  a.active, a:visited, a:active, a:hover, .btn:hover{
+    color: #fff;
+    outline: none;
+  }
+
+
+
+  .popkeywords .btn {
+    @include bg-color-transition();
+    background: $nav-background-color;
+    text-transform: capitalize;
+  }
+
+  .popkeywords .info {
+    @include bg-color-transition();
+    background: $colored_text;
+    text-transform: capitalize;
+  }
+
+  .popkeywords .btn:hover {
+    background: $colored_text;
+  }
+
+  div#gmap-lyt{
+
+    background: $nav-background-color;
+    padding:10px;
+    margin: 40px 0 50px 0;
+  }
+
+
+  .page-header {
+    border-bottom: 0;
+    text-align: center;
+  }
+  .page-header h3, .section-head h3{
+    color: white;
+  }
+  h3{
+    color: $colored_text;
+  }
+
+  .glyphicon{
+    color: $colored_text;
+    font-size:23px;
+    z-index: 99;
+  }
+
+  span.glyphicon {
+    margin-right:10px;
+  }
+
+  h1,h2,h3,h4 {
+    font-family: 'Oswald', sans-serif;
+  }
+
+  a.navbar-brand{
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  input {
+    color:black;
+  }
+
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: $nav-background-color;
+    text-align:center;
+  }
+  .footer .container{
+    text-align:center;
+  }
+
+  body > .container {
+    padding: 60px 15px 0;
+  }
+  .container .text-muted {
+    margin: 20px 0;
+  }
+
+  .footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .btn, .info {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid $colored_text;
+    margin: 0px 6px 6px 0px ;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  h3.diff-col {
+    color:$colored_text;
+  }
+
+
+  .btn-modal {
+    color: #fff;
+    padding: 5px 0px;
+    letter-spacing: 2px;
+    margin: 10px 20px 10px 20px;
+    color: #FFF;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1em;
+    background-color: transparent;
+    border:0;
+    margin-top: 15px;
+  }
+
+  a:focus {
+    border: 0;
+  }
+
+
+  @import 'isotope';
+  @import 'newsItem';
+  @import 'navbar_news';
+  @import 'home';
+  @import 'nganimate';
+  @import 'contact';
+  @import 'newsStory';
+  @import 'components/serviceWrapper';
+  @import 'components/pagination';
+  @import 'components/modal';
+  @import 'components/accordion';
+
+  .lrgIcons {
+    font-size: (5em !important);
+    float:left;
+    margin-right: 20px;
+  }
+
+  .fa-thumbs-o-up{
+    font-size: (4em !important);
+  }
+
+  /* isotop */
+  * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: sans-serif;
+  }
+
+  /* ---- button ---- */
+
+  .button {
+    display: inline-block;
+    padding: 0.5em 1.0em;
+    background: #EEE;
+    border: none;
+    border-radius: 7px;
+    background-image: linear-gradient( to bottom, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, 0.2) );
+    color: #222;
+    font-family: sans-serif;
+    font-size: 16px;
+    text-shadow: 0 1px white;
+    cursor: pointer;
+  }
+
+  .button:hover {
+    background-color: #8CF;
+    text-shadow: 0 1px hsla(0, 0%, 100%, 0.5);
+    color: #222;
+  }
+
+  .button:active,
+  .button.is-checked {
+    background-color: #28F;
+  }
+
+  .button.is-checked {
+    color: white;
+    text-shadow: 0 -1px hsla(0, 0%, 0%, 0.8);
+  }
+
+  .button:active {
+    box-shadow: inset 0 1px 10px hsla(0, 0%, 0%, 0.8);
+  }
+
+  /* ---- button-group ---- */
+
+  .button-group:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  .button-group .button {
+    border-radius: 0;
+    margin-right: 1px;
+  }
+
+  .button-group .button:first-child { border-radius: 0.5em 0 0 0.5em; }
+  .button-group .button:last-child { border-radius: 0 0.5em 0.5em 0; }
+  /* ---- isotope ---- */
+
+  .isotope {
+    border: 0;
+  }
+
+  #skills-isotope {
+    margin-top :20px;
+    margin-bottom :30px;
+  }
+
+.btn-group-wrap {
+  text-align: center;
+
+
+}
+.filters-skills {
+  margin: 0 auto;
+  text-align: center;
+  width: inherit;
+  display: inline-block;margin-top :40px
+}
+
+
+
+  /* clear fix */
+  .isotope:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  /* ---- .element-item ---- */
+  .skills-item {
+    position: relative;
+    float: left;
+    width: 140px;
+    height: 140px;
+    margin: 4px;
+    padding: 10px;
+    background: #888;
+    display: table;
+    text-align: center;
+    color:black;
+    border:2px solid $nav-background-color;
+  }
+
+  .skills-item > * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .skills-item .name {
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 16px;
+    font-weight: normal;
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .skills-item .symbol {
+    position: absolute;
+    left: 10px;
+    top: 0px;
+    font-size: 42px;
+    font-weight: bold;
+    color: white;
+  }
+
+  .skills-item .number {
+    position: absolute;
+    right: 8px;
+    top: 5px;
+  }
+
+  .skills-item .weight {
+    position: absolute;
+    left: 10px;
+    top: 76px;
+    font-size: 12px;
+  }
+
+  .element-item.alkali          { background: #F00; background: hsl(   0, 100%, 50%); }
+  .element-item.alkaline-earth  { background: #F80; background: hsl(  36, 100%, 50%); }
+  .element-item.actinoid        { background: #0F0; background: hsl( 108, 100%, 50%); }
+  .element-item.post-transition { background: #0FF; background: hsl( 180, 100%, 50%); }
+  .frontend_item       { background: #08F; background: hsl( 216, 100%, 50%); }
+  .element-item.diatomic        { background: #00F; background: hsl( 252, 100%, 50%); }
+  .tool_item         { background: #F0F; background: hsl( 288, 100%, 50%); }
+  .specialise_item     { background: #F08; background: hsl( 324, 100%, 50%) ;  }
+  .backend_item      { background: #0F8; background: hsl( 144, 100%, 50%);}
+  .data_item    { background: #FF0; background: hsl(  72, 100%, 50%); }
